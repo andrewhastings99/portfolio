@@ -1,0 +1,883 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Andrew Hastings | Investigative Portfolio</title>
+  <meta name="description" content="Andrew Hastings — investigative storytelling, visual investigations, journalism and documentary media.">
+
+  <style>
+    /* ==================================
+       1. GENERAL DESIGN
+       Change these colours to customize.
+    ================================== */
+
+    :root {
+      --background: #f7f7f4;
+      --text: #202020;
+      --muted: #777;
+      --accent: #a34b35;
+      --line: #deded8;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .container {
+      max-width: 1150px;
+      width: 90%;
+      margin: auto;
+    }
+
+    /* ==================================
+       2. NAVIGATION
+    ================================== */
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--background);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      min-height: 75px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ==================================
+       3. INTRODUCTION
+    ================================== */
+
+    .hero {
+      padding: 100px 0 85px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1.05;
+      max-width: 850px;
+      font-weight: normal;
+      margin-bottom: 25px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .hero-links {
+      margin-top: 30px;
+      display: flex;
+      gap: 25px;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .hero-links a {
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 5px;
+    }
+
+    /* ==================================
+       4. PROJECT SECTION
+    ================================== */
+
+    section {
+      padding: 75px 0;
+      scroll-margin-top: 75px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      font-family: Georgia, serif;
+      font-size: 38px;
+      font-weight: normal;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* FILTER BUTTONS */
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .filter-btn {
+      padding: 9px 16px;
+      background: transparent;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      border-radius: 30px;
+      font-size: 12px;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    /* PROJECT GRID */
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 35px 25px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .project-card img {
+      aspect-ratio: 16 / 10;
+      background: #e5e5e0;
+    }
+
+    .project-info {
+      padding: 22px;
+    }
+
+    .project-category {
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .project-info h3 {
+      font-family: Georgia, serif;
+      font-size: 25px;
+      font-weight: normal;
+      margin: 9px 0;
+    }
+
+    .project-info p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--accent);
+    }
+
+    /* ==================================
+       5. PROJECT DETAIL POP-UP
+    ================================== */
+
+    dialog {
+      border: none;
+      padding: 35px;
+      max-width: 650px;
+      width: 90%;
+      margin: auto;
+      background: var(--card);
+      color: var(--text);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    dialog::backdrop {
+      background: rgba(0,0,0,0.7);
+    }
+
+    dialog h2 {
+      font-family: Georgia, serif;
+      font-size: 32px;
+      margin: 15px 0;
+    }
+
+    dialog p {
+      color: var(--muted);
+      margin-bottom: 15px;
+    }
+
+    .close-btn {
+      float: right;
+      border: 1px solid var(--line);
+      padding: 7px 12px;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .detail-link {
+      color: var(--accent);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    /* ==================================
+       6. WRITING SECTION
+    ================================== */
+
+    .writing-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .writing-item {
+      padding: 25px 0;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .writing-item h3 {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: normal;
+    }
+
+    .writing-item p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .writing-item a {
+      color: var(--accent);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* ==================================
+       7. PHOTOGRAPHY
+    ================================== */
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .photo-grid img {
+      aspect-ratio: 4 / 5;
+      background: #e5e5e0;
+    }
+
+    /* ==================================
+       8. VIDEO
+    ================================== */
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-top: 25px;
+      background: #202020;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      top: 0;
+      left: 0;
+    }
+
+    /* ==================================
+       9. ABOUT & CONTACT
+    ================================== */
+
+    .about-text {
+      max-width: 700px;
+      font-family: Georgia, serif;
+      font-size: 22px;
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 25px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      color: var(--accent);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* ==================================
+       10. MOBILE DESIGN
+    ================================== */
+
+    @media (max-width: 700px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 65px 0;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .writing-item {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">ANDREW HASTINGS</a>
+
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#writing">Writing</a>
+          <a href="#photography">Photography</a>
+          <a href="#about">About</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- INTRODUCTION -->
+
+  <main>
+
+    <div class="hero">
+      <div class="container">
+
+        <div class="eyebrow">
+          Investigative storyteller · Journalist
+        </div>
+
+        <h1>
+          Evidence, images<br>
+          and human stories.
+        </h1>
+
+        <p>
+          I am an investigatory storyteller working across
+          digital investigations, visual journalism, written
+          and video media, and on-the-ground reporting.
+        </p>
+
+        <div class="hero-links">
+          <a href="#work">Explore my work ↓</a>
+          <a href="#about">About me</a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- INVESTIGATIONS -->
+
+    <section id="work">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Selected projects</div>
+            <h2>Investigations</h2>
+          </div>
+          <p>Digital evidence · OSINT · Visual journalism</p>
+        </div>
+
+        <!-- FILTER BUTTONS -->
+
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">All work</button>
+          <button class="filter-btn" data-filter="investigation">Investigations</button>
+          <button class="filter-btn" data-filter="reporting">Reporting</button>
+          <button class="filter-btn" data-filter="film">Film</button>
+        </div>
+
+
+        <div class="project-grid">
+
+          <!-- PROJECT 1 -->
+
+          <article class="project-card"
+            data-category="investigation"
+            data-title="Protest Under Attack"
+            data-description="I contributed to Amnesty International's investigation into violence by security forces in Mozambique following the 2024 election. I sourced and verified digital evidence using geolocation, chronolocation and satellite imagery, with a particular focus on the unlawful use of less lethal weapons."
+            data-link="https://www.amnesty.org/">
+
+            <!-- ADD IMAGE HERE -->
+            <img src="images/mozambique.jpg"
+                 alt="Visual evidence from the Mozambique investigation">
+
+            <div class="project-info">
+              <div class="project-category">Visual investigation · 2025</div>
+              <h3>Protest Under Attack</h3>
+              <p>Human rights violations during Mozambique's post-2024 election crackdown.</p>
+              <span class="read-more">Explore project →</span>
+            </div>
+          </article>
+
+
+          <!-- PROJECT 2 -->
+
+          <article class="project-card"
+            data-category="investigation"
+            data-title="South Sudan Arms Embargo"
+            data-description="I contributed to Amnesty International's ongoing work on arms embargo violations in South Sudan. My research included identifying aircraft, armored vehicles and small arms, as well as analysing satellite imagery of Juba International Airport."
+            data-link="https://www.amnesty.org/">
+
+            <!-- ADD IMAGE HERE -->
+            <img src="images/south-sudan.jpg"
+                 alt="Satellite imagery from South Sudan">
+
+            <div class="project-info">
+              <div class="project-category">Visual investigation · 2025</div>
+              <h3>South Sudan Arms Embargo</h3>
+              <p>Identifying weapons and documenting potential embargo violations.</p>
+              <span class="read-more">Explore project →</span>
+            </div>
+          </article>
+
+
+          <!-- PROJECT 3 -->
+
+          <article class="project-card"
+            data-category="reporting"
+            data-title="Beyond Deterrence"
+            data-description="An article exploring international presence, civilian protection and the experiences of Palestinian families in the occupied West Bank. Based on fieldwork and interviews."
+            data-link="#">
+
+            <!-- ADD IMAGE HERE -->
+            <img src="images/palestine.jpg"
+                 alt="West Bank reporting">
+
+            <div class="project-info">
+              <div class="project-category">Longform reporting · 2026</div>
+              <h3>Beyond Deterrence</h3>
+              <p>Rethinking what protection means in Palestine.</p>
+              <span class="read-more">Read article →</span>
+            </div>
+          </article>
+
+
+          <!-- PROJECT 4 -->
+
+          <article class="project-card"
+            data-category="investigation"
+            data-title="Autonomous Weapons Systems"
+            data-description="Visual investigations into the global use of autonomous weapons systems, combining open-source research and digital evidence verification."
+            data-link="#">
+
+            <!-- ADD IMAGE HERE -->
+            <img src="images/autonomous-weapons.jpg"
+                 alt="Autonomous weapons investigation">
+
+            <div class="project-info">
+              <div class="project-category">Visual investigation · 2025–26</div>
+              <h3>Autonomous Weapons Systems</h3>
+              <p>Investigating the global use of emerging military technologies.</p>
+              <span class="read-more">Explore project →</span>
+            </div>
+          </article>
+
+
+          <!-- PROJECT 5 -->
+
+          <article class="project-card"
+            data-category="investigation"
+            data-title="White Phosphorus in Southern Lebanon"
+            data-description="Digital evidence research and verification concerning the use of white phosphorus in Southern Lebanon."
+            data-link="#">
+
+            <!-- ADD IMAGE HERE -->
+            <img src="images/lebanon.jpg"
+                 alt="Southern Lebanon investigation">
+
+            <div class="project-info">
+              <div class="project-category">Visual investigation</div>
+              <h3>White Phosphorus in Lebanon</h3>
+              <p>Documenting the use of incendiary weapons.</p>
+              <span class="read-more">Explore project →</span>
+            </div>
+          </article>
+
+
+          <!-- PROJECT 6 -->
+
+          <article class="project-card"
+            data-category="film"
+            data-title="Abortion: Add to Cart"
+            data-description="I worked in post-production on this award-winning short documentary, which examines access to abortion pills ordered online."
+            data-link="https://www.youtube.com/">
+
+            <!-- ADD IMAGE HERE -->
+            <img src="images/abortion-film.jpg"
+                 alt="Abortion: Add to Cart documentary">
+
+            <div class="project-info">
+              <div class="project-category">Documentary film · 2022</div>
+              <h3>Abortion: Add to Cart</h3>
+              <p>Post-production on an award-winning short documentary.</p>
+              <span class="read-more">Watch film →</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- WRITING -->
+
+    <section id="writing">
+      <div class="container">
+
+        <div class="eyebrow">Selected publications</div>
+        <div class="section-heading">
+          <h2>Writing</h2>
+        </div>
+
+        <div class="writing-list">
+
+          <div class="writing-item">
+            <div>
+              <h3>Israel's Expanding List of 'Legitimate' Targets</h3>
+              <p>The Governance Post · Commentary</p>
+            </div>
+            <a href="https://www.thegovernancepost.org/"
+               target="_blank">Read article ↗</a>
+          </div>
+
+          <div class="writing-item">
+            <div>
+              <h3>Visual Dialogues with Sanyam Bajaj</h3>
+              <p>The Governance Post · Interview</p>
+            </div>
+            <a href="https://www.thegovernancepost.org/"
+               target="_blank">Read article ↗</a>
+          </div>
+
+          <div class="writing-item">
+            <div>
+              <h3>Beyond Deterrence: Rethinking What Protection Means in Palestine</h3>
+              <p>The Human Rights Chronicle · Forthcoming</p>
+            </div>
+            <span>Coming soon</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PHOTOGRAPHY -->
+
+    <section id="photography">
+      <div class="container">
+
+        <div class="eyebrow">Visual storytelling</div>
+        <div class="section-heading">
+          <h2>Photography</h2>
+        </div>
+
+        <div class="photo-grid">
+
+          <!-- REPLACE THESE WITH YOUR PHOTOGRAPHS -->
+
+          <img src="images/photo-1.jpg" alt="Documentary photograph 1">
+          <img src="images/photo-2.jpg" alt="Documentary photograph 2">
+          <img src="images/photo-3.jpg" alt="Documentary photograph 3">
+          <img src="images/photo-4.jpg" alt="Documentary photograph 4">
+          <img src="images/photo-5.jpg" alt="Documentary photograph 5">
+          <img src="images/photo-6.jpg" alt="Documentary photograph 6">
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- VIDEO -->
+
+    <section id="video">
+      <div class="container">
+
+        <div class="eyebrow">Documentary and multimedia</div>
+        <div class="section-heading">
+          <h2>Video</h2>
+        </div>
+
+        <p>
+          Selected video reporting and documentary projects.
+        </p>
+
+        <div class="video-container">
+
+          <!-- REPLACE VIDEO_ID WITH YOUR YOUTUBE VIDEO ID -->
+
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            title="Documentary video"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+      <div class="container">
+
+        <div class="eyebrow">A little about me</div>
+        <div class="section-heading">
+          <h2>About</h2>
+        </div>
+
+        <p class="about-text">
+          I am an American investigatory storyteller based
+          in Berlin, completing a Master of International
+          Affairs at the Hertie School. My work spans
+          open-source intelligence, digital verification,
+          human rights research, journalism and documentary
+          media. I have worked with Amnesty International's
+          Digital Verification Corps and contributed to
+          investigations documenting human rights violations
+          around the world.
+        </p>
+
+        <div class="contact-links">
+          <a href="mailto:YOUR_EMAIL">Email me ↗</a>
+          <a href="https://www.linkedin.com/"
+             target="_blank">LinkedIn ↗</a>
+          <a href="https://github.com/"
+             target="_blank">GitHub ↗</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="container">
+      Andrew Hastings · Investigative Portfolio · 2026
+    </div>
+  </footer>
+
+
+  <!-- PROJECT DETAIL POP-UP -->
+
+  <dialog id="project-dialog">
+    <button class="close-btn" id="close-dialog">Close ✕</button>
+    <div class="eyebrow">Selected project</div>
+    <h2 id="dialog-title"></h2>
+    <p id="dialog-description"></p>
+    <a id="dialog-link" class="detail-link"
+       href="#" target="_blank">Visit project ↗</a>
+  </dialog>
+
+
+  <!-- INTERACTIVE FUNCTIONS -->
+
+  <script>
+
+    // FILTER PROJECTS BY CATEGORY
+
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+
+        const filter = button.dataset.filter;
+
+        filterButtons.forEach(b => b.classList.remove("active"));
+        button.classList.add("active");
+
+        projectCards.forEach(card => {
+
+          if (filter === "all" || card.dataset.category === filter) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+
+        });
+
+      });
+    });
+
+
+    // OPEN PROJECT DETAILS
+
+    const dialog = document.getElementById("project-dialog");
+
+    projectCards.forEach(card => {
+
+      card.addEventListener("click", () => {
+
+        document.getElementById("dialog-title").textContent =
+          card.dataset.title;
+
+        document.getElementById("dialog-description").textContent =
+          card.dataset.description;
+
+        const link = document.getElementById("dialog-link");
+
+        link.href = card.dataset.link;
+
+        if (card.dataset.link === "#") {
+          link.style.display = "none";
+        } else {
+          link.style.display = "inline";
+        }
+
+        dialog.showModal();
+
+      });
+
+    });
+
+
+    // CLOSE PROJECT DETAILS
+
+    document.getElementById("close-dialog").addEventListener("click", () => {
+      dialog.close();
+    });
+
+    dialog.addEventListener("click", event => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+
+  </script>
+
+</body>
+</html>
