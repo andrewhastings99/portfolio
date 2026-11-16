@@ -1,0 +1,1792 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrew Hastings | Investigative Portfolio</title>
+
+  <style>
+    /* ---------------------------------
+       1. GENERAL DESIGN
+    --------------------------------- */
+
+    :root {
+      --background: #000000;
+      --surface: #ffffff;
+      --text: #ede2e2;
+      --muted: #6e6e6e;
+      --accent: #fffa75;
+      --border: #deded8;
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    /* ---------------------------------
+       2. NAVIGATION
+    --------------------------------- */
+
+    header {
+      height: var(--nav-height);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--background);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+    }
+
+    nav a {
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* ---------------------------------
+       3. INTRODUCTION
+    --------------------------------- */
+
+    .intro {
+      min-height: 75vh;
+      padding: 120px 10% 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 1100px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .intro h1 {
+      max-width: 850px;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1.02;
+      letter-spacing: -3px;
+      margin-bottom: 30px;
+    }
+
+    .intro p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .scroll-cue {
+      margin-top: 70px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ---------------------------------
+       4. SCROLLYTELLING SECTION
+    --------------------------------- */
+
+    .project-heading {
+      padding: 65px 5% 35px;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-heading h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      max-width: 800px;
+      margin-bottom: 15px;
+    }
+
+    .project-heading p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 58% 42%;
+      align-items: start;
+      position: relative;
+    }
+
+    /* The left-hand visual stays in place while the reader scrolls */
+
+    .visual-column {
+      position: sticky;
+      top: var(--nav-height);
+      height: calc(100vh - var(--nav-height));
+      padding: 18px 18px 18px 5%;
+    }
+
+    .visual-frame {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background: #000000;
+      border-radius: 5px;
+    }
+
+      .visual-frame img,
+      .visual-frame video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.7s ease;
+      }
+
+      .visual-frame img,
+      .visual-frame video {
+        pointer-events: none;
+      }
+
+      .visual-frame img.active,
+      .visual-frame video.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+   
+
+    /* The right-hand column contains the scrolling information panels */
+
+    .story-panels {
+      padding: 30px 8% 100px 7%;
+    }
+
+    .story-panel {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 50px 0;
+      opacity: 0.35;
+      transition: opacity 0.5s ease;
+    }
+
+    .story-panel.active {
+      opacity: 1;
+    }
+
+    .panel-number {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+
+    .story-panel h3 {
+      font-size: clamp(25px, 3vw, 38px);
+      line-height: 1.15;
+      margin-bottom: 22px;
+      letter-spacing: -1px;
+    }
+
+    .story-panel p {
+      color: #666666;
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+
+    .panel-note {
+      border-left: 3px solid var(--accent);
+      padding: 12px 18px;
+      margin-top: 12px;
+      background: rgba(255, 255, 255, 0.65);
+      font-size: 13px;
+      color: #555555;
+    }
+
+    .source-link {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 12px;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 3px;
+    }
+
+    /* ---------------------------------
+       5. OTHER PORTFOLIO SECTIONS
+    --------------------------------- */
+
+    .section {
+      padding: 100px 10%;
+      border-top: 1px solid var(--border);
+    }
+
+    .section h2 {
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.1;
+      margin-bottom: 25px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 50px;
+    }
+
+    .work-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 35px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .work-item .category {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .work-item h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .work-item p {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 650px;
+    }
+
+    .work-item a {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    /* ---------------------------------
+       6. PHOTOGRAPHY
+    --------------------------------- */
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .photo-grid img {
+      height: 320px;
+      object-fit: contain;
+      background: #dddddd;
+    }
+
+    /* ---------------------------------
+       7. ABOUT AND CONTACT
+    --------------------------------- */
+
+    .about-text {
+      max-width: 700px;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #666666;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .contact-links a {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 4px;
+    }
+
+    footer {
+      padding: 30px 5%;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* ---------------------------------
+       8. MOBILE DESIGN
+    --------------------------------- */
+
+    @media (max-width: 800px) {
+
+      header {
+        padding: 0 5%;
+      }
+
+      nav {
+        gap: 12px;
+        font-size: 11px;
+      }
+
+      .intro {
+        min-height: 65vh;
+        padding: 90px 7%;
+      }
+
+      .intro h1 {
+        letter-spacing: -2px;
+      }
+
+      .story {
+        display: block;
+      }
+
+      .visual-column {
+        position: sticky;
+        top: var(--nav-height);
+        height: 42vh;
+        padding: 10px 5%;
+        z-index: 10;
+        background: var(--background);
+      }
+
+      .story-panels {
+        padding: 0 8% 70px;
+      }
+
+      .story-panel {
+        min-height: 65vh;
+        padding: 55px 0;
+      }
+
+      .section {
+        padding: 75px 7%;
+      }
+
+      .work-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-grid img {
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        gap: 9px;
+        font-size: 10px;
+      }
+
+      .logo {
+        font-size: 11px;
+      }
+    }
+
+    /* Show content normally if JavaScript is unavailable */
+    .js .story-panel {
+      opacity: 0.35;
+    }
+
+    .js .story-panel.active {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <header>
+    <a href="#" class="logo">PORTFOLIO</a>
+
+    <nav>
+      <a href="#investigations">Investigations</a>
+      <a href="#writing">Writing</a>
+      <a href="#film">Film</a>
+      <a href="#photography">Photography</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+
+  <!-- INTRODUCTION -->
+
+  <section class="intro">
+    <div class="eyebrow">Digital nvestigations · Visual storytelling</div>
+
+    <h1>ANDREW HASTINGS</h1>
+
+    <p>
+      I am an investigative storyteller, uncovering digital evidence with 
+      Amnesty International’s Digital Verification Corps, part of the Crisis Evidence Lab.
+      In May 2027, I will complete my master's in International Affairs at the Hertie School in Berlin.
+    </p>
+
+    <div class="scroll-cue">↓ Scroll to explore selected work</div>
+  </section>
+
+
+  <!-- FEATURED INVESTIGATION -->
+
+  <section id="investigations">
+
+    <div class="project-heading">
+      <div class="eyebrow">Featured investigation · 2025</div>
+
+      <h2>Protest Under Attack:</h2>
+
+      <p>
+        Human Rights Violations During Mozambique's Post-2024 Election Crackdown.
+        An investigation by Amnesty International.
+      </p>
+    </div>
+
+
+    <div class="story">
+
+      <!-- LEFT: FIXED VISUAL -->
+
+      <div class="visual-column">
+        <div class="visual-frame">
+
+          <!--
+            These images change as the reader scrolls.
+            Replace the filenames with your own images.
+          -->
+
+        <video
+          src="videos/mozambique-01.mp4"
+          class="story-video active"
+          data-visual="1"
+          autoplay
+          muted
+          loop
+          playsinline
+          controls
+          aria-label="Video footage from the Mozambique investigation"
+        ></video>
+
+          <video
+          src="videos/mozambique-02.mp4"
+          class="story-video"
+          data-visual="2"
+          autoplay
+          muted
+          loop
+          playsinline
+          controls
+          aria-label="Video footage from the Mozambique investigation"
+        ></video>
+
+          <img
+            src="images/mozambique-01.jpg"
+            alt="Evidence from the Mozambique investigation"
+            data-visual="3"
+          >
+
+          <img
+            src="images/mozambique-02.jpg"
+            class="story-image"
+            data-visual="4"
+          >
+        </div>
+      </div>
+
+
+      <!-- RIGHT: SCROLLING INFORMATION PANELS -->
+
+      <div class="story-panels">
+
+        <article class="story-panel active" data-step="1">
+
+          <div class="panel-number">01 — THE INVESTIGATION</div>
+
+          <h3>Protest under attack</h3>
+
+          <p>
+            Following Mozambique's 2024 general election, security forces
+            cracked down on protesters. Amnesty International investigated
+            human rights violations committed during the demonstrations.
+          </p>
+
+          <p>
+            I contributed to the investigation by sourcing and verifying
+            digital evidence, including footage documenting the use of
+            less-lethal weapons by police.
+          </p>
+
+          <div class="panel-note">
+            My contribution: digital evidence collection, verification,
+            geolocation, and chronolocation.
+          </div>
+
+        </article>
+
+
+        <article class="story-panel" data-step="2">
+
+          <div class="panel-number">02 — THE FOOTAGE</div>
+
+          <h3>Documenting police violence</h3>
+
+          <p>
+            Videos shared online provided important evidence of police
+            conduct during the protests. I helped identify and assess
+            footage showing the use of tear gas and kinetic impact
+            projectiles.
+          </p>
+
+          <p>
+            The investigation examined how police deployed these weapons,
+            including instances in which tear gas was fired in an
+            uncontrolled manner.
+          </p>
+
+          <div class="panel-note">
+            Replace the visual with a still from the original footage,
+            an annotated screenshot, or a short video.
+          </div>
+
+        </article>
+
+
+        <article class="story-panel" data-step="3">
+
+          <div class="panel-number">03 — GEOLOCATION</div>
+
+          <h3>Establishing where it happened</h3>
+
+          <p>
+            Digital footage does not always reveal where it was recorded.
+            Geolocation involves comparing visible landmarks, buildings,
+            road layouts, and other environmental details against
+            independently available imagery.
+          </p>
+
+          <p>
+            This process helps establish whether a video genuinely
+            documents the location claimed.
+          </p>
+
+          <div class="panel-note">
+            Suggested visual: a split-screen comparison of the original
+            footage and the corresponding satellite or street-level image.
+          </div>
+
+        </article>
+
+
+        <article class="story-panel" data-step="4">
+
+          <div class="panel-number">04 — THE FINDINGS</div>
+
+          <h3>Turning evidence into accountability</h3>
+
+          <p>
+            The investigation contributed to Amnesty International's
+            reporting on human rights violations during Mozambique's
+            post-election crackdown.
+          </p>
+
+          <p>
+            The final report brought together witness accounts,
+            digital evidence, and analysis to document violations
+            and call for accountability.
+          </p>
+
+          <a
+            class="source-link"
+            href="https://www.amnesty.org/en/latest/research/2025/04/mozambique-police-protest-crackdown/"
+            target="_blank"
+            rel="noopener"
+          >
+            Read the Amnesty International report ↗
+          </a>
+
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+<!-- =====================================================
+     SOUTH SUDAN CASE STUDY
+     Insert after the Mozambique investigation section.
+====================================================== -->
+
+<section id="south-sudan-case-study">
+
+  <div class="ss-heading">
+    <div class="ss-eyebrow">Visual investigation · May 2025</div>
+    <h2>South Sudan: Following the arms embargo</h2>
+    <p>
+      Satellite imagery and open-source research examining the
+      continued operation of military helicopters in South Sudan.
+      Amnesty International.
+    </p>
+  </div>
+
+  <div class="ss-story">
+
+    <!-- LEFT: FIXED VISUAL PANEL -->
+
+    <div class="ss-visual-column">
+      <div class="ss-visual-frame">
+
+        <!-- Stage 1: Context -->
+        <img
+          src="images/south-sudan-01.jpg"
+          alt="Overview image introducing the South Sudan arms embargo investigation"
+          class="ss-image is-active"
+          data-ss-visual="1"
+        >
+
+        <!-- Stage 2: Satellite imagery -->
+        <img
+          src="images/south-sudan-02.jpg"
+          alt="Satellite image of the military area at Juba International Airport"
+          class="ss-image"
+          data-ss-visual="2"
+        >
+
+        <!-- Stage 3: Time comparison -->
+        <img
+          src="images/south-sudan-03.jpg"
+          alt="Comparison of satellite imagery showing the positions of Mi-24 helicopters on different dates"
+          class="ss-image"
+          data-ss-visual="3"
+        >
+
+        <!-- Stage 4: Helicopter identification -->
+        <img
+          src="images/south-sudan-04.jpg"
+          alt="Satellite imagery detail showing the area where Mi-24 attack helicopters are usually stationed"
+          class="ss-image"
+          data-ss-visual="4"
+        >
+
+        <!-- Stage 5: Wider findings -->
+        <img
+          src="images/south-sudan-05.jpg"
+          alt="Visual documenting the wider Amnesty International investigation into arms embargo violations"
+          class="ss-image"
+          data-ss-visual="5"
+        >
+
+        <!-- Fallback if an image has not yet been added -->
+        <div class="ss-placeholder" id="ss-placeholder">
+          <span class="ss-placeholder-label">VISUAL EVIDENCE</span>
+          <strong id="ss-placeholder-title">South Sudan</strong>
+          <p id="ss-placeholder-description">
+            Add your own satellite imagery, evidence screenshots,
+            maps, or annotated visual material here.
+          </p>
+        </div>
+
+        <!-- Image caption -->
+        <div class="ss-caption" id="ss-caption">
+          South Sudan · Arms embargo investigation · 2025
+        </div>
+
+        <!-- Stage indicator -->
+        <div class="ss-counter" id="ss-counter">
+          01 / 05
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- RIGHT: SCROLLING INFORMATION PANELS -->
+
+    <div class="ss-panels">
+
+      <!-- PANEL 1 -->
+
+      <article class="ss-panel is-active" data-ss-step="1">
+
+        <div class="ss-number">01 — THE INVESTIGATION</div>
+
+        <h3>When an arms embargo exists on paper</h3>
+
+        <p>
+          Since 2018, the United Nations Security Council has
+          maintained an arms embargo on South Sudan. Yet concerns
+          persisted over the continued availability and use of
+          military equipment by the country's armed forces.
+        </p>
+
+        <p>
+          In May 2025, Amnesty International called on the Security
+          Council to renew and enforce the embargo, citing evidence
+          of ongoing violations and the risks they posed to civilians.
+        </p>
+
+        <div class="ss-contribution">
+          <span>MY CONTRIBUTION</span>
+          <p>
+            I contributed to Amnesty International's wider
+            open-source investigation into arms embargo violations
+            in South Sudan, sourcing evidence concerning military
+            equipment and its use.
+          </p>
+        </div>
+
+        <div class="ss-source">
+          <a
+            href="https://www.amnesty.org/en/latest/news/2025/05/south-sudan-un-security-council-must-renew-and-enforce-arms-embargo-to-protect-civilians/"
+            target="_blank"
+            rel="noopener"
+          >
+            Read the Amnesty International report ↗
+          </a>
+        </div>
+
+      </article>
+
+
+      <!-- PANEL 2 -->
+
+      <article class="ss-panel" data-ss-step="2">
+
+        <div class="ss-number">02 — SATELLITE IMAGERY</div>
+
+        <h3>Looking beyond what is visible on the ground</h3>
+
+        <p>
+          Satellite imagery provided an important means of examining
+          military activity at Juba International Airport.
+          Amnesty International analysed imagery of the airport's
+          military area to investigate the movement of Mi-24
+          attack helicopters.
+        </p>
+
+        <p>
+          My portfolio identifies this satellite-imagery work as
+          part of my contribution to the investigation.
+        </p>
+
+        <div class="ss-evidence-note">
+          <strong>Visual to include</strong>
+          <p>
+            A satellite image of the military area at Juba
+            International Airport. If possible, use a version
+            with the relevant area clearly marked.
+          </p>
+        </div>
+
+        <div class="ss-method">
+          <span>INVESTIGATIVE FOCUS</span>
+          <p>
+            Military infrastructure · Aircraft identification ·
+            Satellite imagery
+          </p>
+        </div>
+
+      </article>
+
+
+      <!-- PANEL 3 -->
+
+      <article class="ss-panel" data-ss-step="3">
+
+        <div class="ss-number">03 — TEMPORAL COMPARISON</div>
+
+        <h3>What changes when you compare different dates?</h3>
+
+        <p>
+          Amnesty's report describes satellite imagery captured
+          between 30 January and 23 February 2025. It shows the
+          positions of Mi-24 helicopters on four different dates.
+        </p>
+
+        <p>
+          The report states that one or two of the three helicopters
+          usually stationed at the airport were missing on several
+          February dates. Amnesty interpreted this as suggesting
+          that the helicopters were operational.
+        </p>
+
+        <div class="ss-evidence-note">
+          <strong>Visual to include</strong>
+          <p>
+            A chronological comparison of the four satellite images
+            reproduced in the Amnesty report, with the dates and
+            helicopter positions clearly labelled.
+          </p>
+        </div>
+
+        <p class="ss-caution">
+          The absence of an aircraft from its usual position does
+          not, by itself, establish where it went or what operation
+          it conducted.
+        </p>
+
+      </article>
+
+
+      <!-- PANEL 4 -->
+
+      <article class="ss-panel" data-ss-step="4">
+
+        <div class="ss-number">04 — IDENTIFICATION AND INFERENCE</div>
+
+        <h3>From imagery to an evidentiary finding</h3>
+
+        <p>
+          The report identifies the aircraft as Mi-24 attack
+          helicopters. It also recalls that sources had told
+          Amnesty International in 2020 that the government's
+          fleet had been non-functional and grounded when the
+          arms embargo was established in 2018.
+        </p>
+
+        <p>
+          Amnesty had subsequently established that the government
+          acquired spare parts to refurbish the helicopters.
+          Their continued operation strongly suggested further
+          embargo violations involving the ongoing sourcing
+          of spare parts.
+        </p>
+
+        <div class="ss-evidence-note">
+          <strong>Visual to include</strong>
+          <p>
+            A close-up of the relevant satellite imagery alongside
+            an appropriately sourced aircraft reference image.
+            Keep the reference image distinct from the satellite
+            evidence.
+          </p>
+        </div>
+
+        <div class="ss-method">
+          <span>THE DISTINCTION</span>
+          <p>
+            Observed: aircraft absent from usual positions on
+            several dates. Report's inference: aircraft were
+            operational, suggesting continued spare-parts supply.
+          </p>
+        </div>
+
+      </article>
+
+
+      <!-- PANEL 5 -->
+
+      <article class="ss-panel" data-ss-step="5">
+
+        <div class="ss-number">05 — THE WIDER INVESTIGATION</div>
+
+        <h3>Tracing the movement of military equipment</h3>
+
+        <p>
+          The May 2025 report also examined the deployment of
+          Ugandan People's Defence Forces (UPDF) personnel and
+          equipment to South Sudan.
+        </p>
+
+        <p>
+          Amnesty's Crisis Evidence Lab verified videos showing
+          UPDF personnel arriving at Juba International Airport
+          on 11 March 2025, and military vehicles in Nimule,
+          on the South Sudanese side of the border, on 17 March.
+        </p>
+
+        <p>
+          The report also discussed the transport of troops and
+          materiel by Freedom Airlines Express and the use of
+          Turkish-manufactured Katmerciler Hizir armoured
+          personnel carriers.
+        </p>
+
+        <div class="ss-attribution">
+          <strong>Attribution note</strong>
+          <p>
+            These are findings from Amnesty International's wider
+            investigation. They are included here to show the
+            broader context of the report, not to imply that I
+            personally conducted each video verification.
+          </p>
+        </div>
+
+        <div class="ss-contribution">
+          <span>THE OUTCOME</span>
+          <p>
+            Amnesty International called on the UN Security Council
+            to renew and enforce the arms embargo to protect civilians.
+          </p>
+        </div>
+
+        <div class="ss-source">
+          <a
+            href="https://www.amnesty.org/en/latest/news/2025/05/south-sudan-un-security-council-must-renew-and-enforce-arms-embargo-to-protect-civilians/"
+            target="_blank"
+            rel="noopener"
+          >
+            Read the full investigation ↗
+          </a>
+        </div>
+
+      </article>
+
+    </div>
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SOUTH SUDAN CASE STUDY STYLES
+====================================================== -->
+
+<style>
+
+  #south-sudan-case-study {
+    --ss-accent: #b65b3e;
+    --ss-text: #202020;
+    --ss-muted: #707070;
+    --ss-border: #deded8;
+    --ss-background: #f4f4f1;
+
+    color: var(--ss-text);
+    background: var(--ss-background);
+    border-top: 1px solid var(--ss-border);
+  }
+
+  #south-sudan-case-study * {
+    box-sizing: border-box;
+  }
+
+  /* Heading */
+
+  #south-sudan-case-study .ss-heading {
+    padding: 75px 5% 45px;
+  }
+
+  #south-sudan-case-study .ss-eyebrow {
+    color: var(--ss-accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  #south-sudan-case-study .ss-heading h2 {
+    font-size: clamp(32px, 5vw, 58px);
+    line-height: 1.08;
+    letter-spacing: -2px;
+    max-width: 850px;
+    margin-bottom: 18px;
+  }
+
+  #south-sudan-case-study .ss-heading > p {
+    max-width: 650px;
+    color: var(--ss-muted);
+    line-height: 1.8;
+  }
+
+  /* Two-column story */
+
+  #south-sudan-case-study .ss-story {
+    display: grid;
+    grid-template-columns: 58% 42%;
+    align-items: start;
+  }
+
+  /* Fixed visual */
+
+  #south-sudan-case-study .ss-visual-column {
+    position: sticky;
+    top: 72px;
+    height: calc(100vh - 72px);
+    padding: 18px 18px 18px 5%;
+  }
+
+  #south-sudan-case-study .ss-visual-frame {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    background: #252525;
+  }
+
+  #south-sudan-case-study .ss-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.65s ease;
+    z-index: 1;
+    background: #252525;
+  }
+
+  #south-sudan-case-study .ss-image.is-active {
+    opacity: 1;
+  }
+
+  /* Placeholder */
+
+  #south-sudan-case-study .ss-placeholder {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 35px;
+    text-align: center;
+    color: white;
+    background:
+      radial-gradient(circle at 50% 40%, #555, #1d1d1d 75%);
+    transition: opacity 0.4s ease;
+  }
+
+  #south-sudan-case-study .ss-placeholder-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #d7a18e;
+    margin-bottom: 18px;
+  }
+
+  #south-sudan-case-study .ss-placeholder strong {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  #south-sudan-case-study .ss-placeholder p {
+    max-width: 300px;
+    color: #cccccc;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* Caption and counter */
+
+  #south-sudan-case-study .ss-caption {
+    position: absolute;
+    z-index: 4;
+    bottom: 18px;
+    left: 18px;
+    right: 90px;
+    padding: 11px 14px;
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  #south-sudan-case-study .ss-counter {
+    position: absolute;
+    z-index: 4;
+    bottom: 18px;
+    right: 18px;
+    padding: 11px 12px;
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  /* Scrolling panels */
+
+  #south-sudan-case-study .ss-panels {
+    padding: 25px 9% 100px 7%;
+  }
+
+  #south-sudan-case-study .ss-panel {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 55px 0;
+    opacity: 0.3;
+    transition: opacity 0.5s ease;
+  }
+
+  #south-sudan-case-study .ss-panel.is-active {
+    opacity: 1;
+  }
+
+  #south-sudan-case-study .ss-number {
+    color: var(--ss-accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    margin-bottom: 20px;
+  }
+
+  #south-sudan-case-study .ss-panel h3 {
+    font-size: clamp(25px, 3vw, 39px);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 22px;
+  }
+
+  #south-sudan-case-study .ss-panel > p {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #626262;
+    margin-bottom: 17px;
+  }
+
+  /* Evidence and contribution boxes */
+
+  #south-sudan-case-study .ss-contribution,
+  #south-sudan-case-study .ss-evidence-note,
+  #south-sudan-case-study .ss-method,
+  #south-sudan-case-study .ss-attribution {
+    padding: 17px 19px;
+    margin: 15px 0;
+    background: rgba(255, 255, 255, 0.7);
+    border-left: 3px solid var(--ss-accent);
+  }
+
+  #south-sudan-case-study .ss-contribution > span,
+  #south-sudan-case-study .ss-method > span {
+    display: block;
+    color: var(--ss-accent);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  #south-sudan-case-study .ss-contribution p,
+  #south-sudan-case-study .ss-evidence-note p,
+  #south-sudan-case-study .ss-method p,
+  #south-sudan-case-study .ss-attribution p {
+    color: #606060;
+    font-size: 13px;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  #south-sudan-case-study .ss-evidence-note strong,
+  #south-sudan-case-study .ss-attribution strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 7px;
+  }
+
+  #south-sudan-case-study .ss-caution {
+    border-top: 1px solid var(--ss-border);
+    border-bottom: 1px solid var(--ss-border);
+    padding: 15px 0;
+    font-size: 12px !important;
+  }
+
+  /* Source links */
+
+  #south-sudan-case-study .ss-source {
+    margin-top: 18px;
+  }
+
+  #south-sudan-case-study .ss-source a {
+    display: inline-block;
+    color: var(--ss-accent);
+    font-size: 13px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--ss-accent);
+    padding-bottom: 4px;
+  }
+
+  /* Mobile */
+
+  @media (max-width: 800px) {
+
+    #south-sudan-case-study .ss-heading {
+      padding: 60px 7% 35px;
+    }
+
+    #south-sudan-case-study .ss-story {
+      display: block;
+    }
+
+    #south-sudan-case-study .ss-visual-column {
+      top: 72px;
+      height: 42vh;
+      padding: 10px 5%;
+      z-index: 10;
+      background: var(--ss-background);
+    }
+
+    #south-sudan-case-study .ss-panels {
+      padding: 0 8% 70px;
+    }
+
+    #south-sudan-case-study .ss-panel {
+      min-height: 68vh;
+      padding: 55px 0;
+    }
+
+    #south-sudan-case-study .ss-heading h2 {
+      letter-spacing: -1px;
+    }
+  }
+
+</style>
+
+
+<!-- =====================================================
+     SOUTH SUDAN SCROLL INTERACTION
+====================================================== -->
+
+<script>
+
+(() => {
+
+  const section = document.getElementById("south-sudan-case-study");
+
+  if (!section) return;
+
+  const panels = section.querySelectorAll(".ss-panel");
+  const images = section.querySelectorAll(".ss-image");
+
+  const placeholder = section.querySelector("#ss-placeholder");
+  const placeholderTitle = section.querySelector("#ss-placeholder-title");
+  const placeholderDescription = section.querySelector("#ss-placeholder-description");
+
+  const caption = section.querySelector("#ss-caption");
+  const counter = section.querySelector("#ss-counter");
+
+  const visualInformation = {
+
+    1: {
+      caption: "South Sudan · Arms embargo investigation · 2025",
+      title: "South Sudan",
+      description: "The investigation into military equipment and the arms embargo."
+    },
+
+    2: {
+      caption: "Juba International Airport · Military area",
+      title: "Satellite imagery",
+      description: "Imagery of the military area at Juba International Airport."
+    },
+
+    3: {
+      caption: "30 January – 23 February 2025 · Satellite comparison",
+      title: "Comparing dates",
+      description: "A chronological comparison of helicopter positions."
+    },
+
+    4: {
+      caption: "Mi-24 attack helicopters · Juba International Airport",
+      title: "Aircraft identification",
+      description: "A closer look at the area where the helicopters were usually stationed."
+    },
+
+    5: {
+      caption: "Amnesty International · Wider investigation",
+      title: "The wider findings",
+      description: "Additional findings from Amnesty International's investigation."
+    }
+
+  };
+
+
+  function updateVisual(step) {
+
+    const information = visualInformation[step];
+
+    if (!information) return;
+
+    // Remove active state from all images.
+    images.forEach(image => {
+      image.classList.remove("is-active");
+    });
+
+    // Select the image for this panel.
+    const selectedImage = section.querySelector(
+      `.ss-image[data-ss-visual="${step}"]`
+    );
+
+    // Update placeholder text.
+    placeholderTitle.textContent = information.title;
+    placeholderDescription.textContent = information.description;
+
+    // Display the selected image, if it exists.
+    if (selectedImage) {
+
+      selectedImage.classList.add("is-active");
+
+      if (selectedImage.complete && selectedImage.naturalWidth > 0) {
+
+        placeholder.style.opacity = "0";
+        placeholder.style.pointerEvents = "none";
+
+      } else {
+
+        placeholder.style.opacity = "1";
+        placeholder.style.pointerEvents = "auto";
+
+        selectedImage.onload = () => {
+          if (selectedImage.classList.contains("is-active")) {
+            placeholder.style.opacity = "0";
+          }
+        };
+
+        selectedImage.onerror = () => {
+          if (selectedImage.classList.contains("is-active")) {
+            placeholder.style.opacity = "1";
+          }
+        };
+
+      }
+
+    } else {
+
+      placeholder.style.opacity = "1";
+      placeholder.style.pointerEvents = "auto";
+
+    }
+
+    // Update caption and stage counter.
+    caption.textContent = information.caption;
+    counter.textContent = String(step).padStart(2, "0") + " / 05";
+
+  }
+
+
+  // Observe scrolling panels.
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        panels.forEach(panel => {
+          panel.classList.remove("is-active");
+        });
+
+        entry.target.classList.add("is-active");
+
+        const step = entry.target.dataset.ssStep;
+
+        updateVisual(step);
+
+      }
+
+    });
+
+  }, {
+    threshold: 0.45
+  });
+
+
+  panels.forEach(panel => {
+    observer.observe(panel);
+  });
+
+
+  // Set the initial image.
+  updateVisual("1");
+
+})();
+
+</script>
+
+<!-- END SOUTH SUDAN CASE STUDY -->
+
+
+
+  <!-- OTHER INVESTIGATIONS -->
+
+  <section class="section">
+    <div class="eyebrow">Selected work</div>
+    <h2>Other investigations</h2>
+
+    <p class="section-intro">
+      Further work involving open-source intelligence, satellite imagery,
+      digital verification, and human rights research.
+    </p>
+
+    <div class="work-list">
+
+      <div class="work-item">
+        <div class="category">Satellite imagery · 2025</div>
+        <div>
+          <h3>South Sudan: Arms embargo violations</h3>
+          <p>
+            Contributed to Amnesty International research examining
+            arms embargo violations in South Sudan, including the
+            identification of aircraft and military equipment through
+            satellite imagery.
+          </p>
+          <a
+            href="https://www.amnesty.org/en/latest/news/2025/05/south-sudan-un-security-council-must-renew-and-enforce-arms-embargo-to-protect-civilians/"
+            target="_blank"
+            rel="noopener"
+          >
+            Read the report ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="category">Digital investigations</div>
+        <div>
+          <h3>Autonomous weapons systems</h3>
+          <p>
+            Contributed to Amnesty International investigations
+            examining the global use and implications of autonomous
+            weapons systems.
+          </p>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="category">Visual investigations</div>
+        <div>
+          <h3>Southern Lebanon, Turkey, and Berlin</h3>
+          <p>
+            Additional investigations involving white phosphorus
+            in Southern Lebanon and police violence in Turkey and Berlin.
+          </p>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="category">Investigative analysis</div>
+        <div>
+          <h3>Myanmar</h3>
+          <p>
+            Investigative analysis and visual evidence work relating
+            to the Rohingya genocide.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FIELD REPORTING -->
+
+  <section class="section" id="writing">
+    <div class="eyebrow">Field reporting</div>
+    <h2>Reporting from the ground</h2>
+
+    <p class="section-intro">
+      Reporting on human rights, conflict, and the people living
+      through them.
+    </p>
+
+    <div class="work-list">
+
+      <div class="work-item">
+        <div class="category">Human Rights Chronicle · 2026</div>
+        <div>
+          <h3>Beyond Deterrence: Rethinking What Protection Means in Palestine</h3>
+          <p>
+            An account of international protective presence in the
+            occupied West Bank, drawing on fieldwork, interviews,
+            and the experiences of Palestinian communities.
+          </p>
+          <span class="source-link">Forthcoming</span>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="category">The Governance Post</div>
+        <div>
+          <h3>Israel's expanding list of 'legitimate' targets</h3>
+          <p>
+            An article examining the language and legal framing
+            surrounding military targeting.
+          </p>
+          <a
+            href="https://www.thegovernancepost.org/articles/israel-s-expanding-list-of-legitimate-targets"
+            target="_blank"
+            rel="noopener"
+          >
+            Read article ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="category">The Governance Post</div>
+        <div>
+          <h3>Visual dialogues with Sanyam Bajaj</h3>
+          <p>
+            A conversation exploring the relationship between
+            art, policy, and climate narratives.
+          </p>
+          <a
+            href="https://www.thegovernancepost.org/articles/the-art-policy-connection-sanyam-bajaj-s-visual-dialogue-on-climate-narratives"
+            target="_blank"
+            rel="noopener"
+          >
+            Read article ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FILM -->
+
+  <section class="section" id="film">
+    <div class="eyebrow">Film and multimedia</div>
+    <h2>Stories in motion</h2>
+
+    <p class="section-intro">
+      Experience in documentary production, post-production,
+      and creative development.
+    </p>
+
+    <div class="work-item">
+      <div class="category">Documentary · 2022</div>
+      <div>
+        <h3>Abortion: Add to Cart</h3>
+        <p>
+          A short documentary about abortion pills ordered online
+          and the activists using the internet to help people
+          access abortion care. I worked as a post-production intern.
+        </p>
+
+        <a
+          href="https://www.youtube.com/watch?v=DaKfTl5Naeo"
+          target="_blank"
+          rel="noopener"
+        >
+          Watch the documentary ↗
+        </a>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="category">Creative development · 2022</div>
+      <div>
+        <h3>American High</h3>
+        <p>
+          Reviewed feature film and television pilot scripts,
+          producing coverage reports for a production company
+          specialising in high-school comedies.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PHOTOGRAPHY -->
+
+  <section class="section" id="photography">
+    <div class="eyebrow">Photography</div>
+    <h2>Selected photographs</h2>
+
+    <p class="section-intro">
+      A selection of documentary, field, and personal photography.
+      Replace these placeholders with your own images.
+    </p>
+
+    <div class="photo-grid">
+      <img src="images/photo-1.jpg" alt="Selected photograph 1">
+      <img src="images/photo-2.jpg" alt="Selected photograph 2">
+      <img src="images/photo-3.jpg" alt="Selected photograph 3">
+      <img src="images/photo-4.jpg" alt="Selected photograph 4">
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section class="section" id="about">
+    <div class="eyebrow">About</div>
+    <h2>Andrew Hastings</h2>
+
+    <p class="about-text">
+      I am completing a Master of International Affairs at the
+      Hertie School in Berlin, specialising in Human Rights and
+      Global Governance. My work brings together open-source
+      intelligence, digital verification, investigative research,
+      and storytelling.
+
+      <br><br>
+
+      I have worked with Amnesty International's Digital Verification
+      Corps and co-coordinate open-source investigations in Berlin.
+      My broader experience includes field reporting, human rights
+      research, documentary production, and writing.
+    </p>
+
+    <div class="contact-links">
+      <a href="mailto:YOUR_EMAIL_ADDRESS">Email</a>
+      <a href="YOUR_LINKEDIN_URL" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+
+  <footer>
+    © 2026 Andrew Hastings · All writing and photography are original
+    unless otherwise indicated.
+  </footer>
+
+
+  <!-- ---------------------------------
+       9. SCROLL INTERACTION
+  --------------------------------- -->
+
+  <script>
+
+    
+// MOZAMBIQUE SCROLL INTERACTION
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.documentElement.classList.add("js");
+
+  // Find all Mozambique text panels.
+  const panels = document.querySelectorAll(
+    "#investigations .story-panel"
+  );
+
+  // Find ALL images and videos, not just images.
+  const visuals = document.querySelectorAll(
+    "#investigations .visual-frame img, #investigations .visual-frame video"
+  );
+
+  // Change the displayed visual.
+  function changeVisual(step) {
+
+    visuals.forEach(visual => {
+
+      const isSelected = visual.dataset.visual === step;
+
+      visual.classList.toggle("active", isSelected);
+
+      // Stop videos that are no longer visible.
+      if (visual.tagName === "VIDEO") {
+
+        if (isSelected) {
+          visual.play().catch(() => {});
+        } else {
+          visual.pause();
+          visual.currentTime = 0;
+        }
+
+      }
+
+    });
+
+  }
+
+  // Watch the scrolling text panels.
+  const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        // Highlight the current text panel.
+        panels.forEach(panel => {
+          panel.classList.remove("active");
+        });
+
+        entry.target.classList.add("active");
+
+        // Find the corresponding visual.
+        const step = entry.target.dataset.step;
+
+        changeVisual(step);
+
+      }
+
+    });
+
+  }, {
+    root: null,
+    rootMargin: "-40% 0px -40% 0px",
+    threshold: 0
+  });
+
+  // Start observing every text panel.
+  panels.forEach(panel => {
+    observer.observe(panel);
+  });
+
+  // Display the first visual on page load.
+  changeVisual("1");
+
+});
+
+  </script>
+
+</body>
+</html>
