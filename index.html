@@ -1,0 +1,2569 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrew Hastings | Portfolio</title>
+
+  <style>
+    /* ---------------------------------
+       1. GENERAL DESIGN
+    --------------------------------- */
+
+    :root {
+      --background: #ffffff;
+      --surface: #ffffff;
+      --text: #000000;
+      --muted: #5a5a5a;
+      --accent: #fff878;
+      --border: #deded8;
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    /* ---------------------------------
+       2. NAVIGATION
+    --------------------------------- */
+
+    header {
+      height: var(--nav-height);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--background);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+    }
+
+    nav a {
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* ---------------------------------
+       3. INTRODUCTION
+    --------------------------------- */
+
+    .intro {
+      min-height: 75vh;
+      padding: 120px 10% 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .intro-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .intro-photo {
+      position: relative;
+      width: 220px;
+      margin-right: 14px;
+      margin-bottom: 14px;
+    }
+
+    .intro-photo::after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: 100%;
+      height: 100%;
+      background: #fffa75;
+      z-index: 0;
+    }
+
+    .intro-photo img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .eyebrow {
+      color: #000000;
+      background: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      padding: 4px 8px;
+      display: inline-block;
+    }
+
+    .intro h1 {
+      max-width: 850px;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1.02;
+      letter-spacing: -3px;
+      margin-bottom: 30px;
+    }
+
+    .intro p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .scroll-cue {
+      margin-top: 70px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+      #film .film-award {
+        display: table;
+        margin: -12px auto 25px;
+        padding: 4px 9px;
+        background: #fffa9e;
+        color: #000000;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    /* ---------------------------------
+       4. SCROLLYTELLING SECTION
+    --------------------------------- */
+
+    .project-heading {
+      padding: 65px 5% 35px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .project-heading h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      max-width: 800px;
+      margin: 0 auto 15px;
+    }
+
+    .project-heading p {
+      color: var(--muted);
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 58% 42%;
+      align-items: start;
+      position: relative;
+    }
+
+    .visual-column {
+      position: sticky;
+      top: var(--nav-height);
+      height: calc(100vh - var(--nav-height));
+      padding: 18px 18px 18px 5%;
+    }
+
+    .visual-frame {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background: #ffffff;
+      border-radius: 5px;
+    }
+
+    .visual-frame img,
+    .visual-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+
+    .visual-frame img.active,
+    .visual-frame video.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .story-panels {
+      padding: 30px 8% 100px 7%;
+    }
+
+    .story-panel {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 50px 0;
+      opacity: 0.35;
+      transition: opacity 0.5s ease;
+    }
+
+    .story-panel.active {
+      opacity: 1;
+    }
+
+    .panel-number {
+      color: #000000;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+      padding: 4px 8px;
+      width: fit-content;
+      display: inline-block;
+    }
+
+    .story-panel h4 {
+      font-size: clamp(25px, 3vw, 38px);
+      line-height: 1.15;
+      margin-bottom: 22px;
+      letter-spacing: -1px;
+    }
+
+    .story-panel p {
+      color: #666666;
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+
+    .panel-note {
+      border-left: 3px solid var(--accent);
+      padding: 12px 18px;
+      margin-top: 12px;
+      background: rgba(255, 255, 255, 0.65);
+      font-size: 13px;
+      color: #555555;
+    }
+
+    .source-link {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 12px;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 3px;
+    }
+
+    /* ---------------------------------
+       5. OTHER PORTFOLIO SECTIONS
+    --------------------------------- */
+
+    .section {
+      padding: 50px 10%;
+      border-top: 1px solid var(--border);
+    }
+
+      #other-investigations {
+        padding-bottom: 0px;
+      }
+
+      #writing {
+      padding-top: 50px;
+      padding-bottom: 10px;
+    }
+
+
+    .section h2 {
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.1;
+      margin-bottom: 25px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 50px;
+    }
+
+    #writing {
+      padding-left: 2%;
+      padding-right: 2%;
+    }
+
+    .work-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .work-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    #writing .work-item {
+      display: flex !important;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    #writing .work-item > div {
+      flex: 1;
+      min-width: 0;
+    }
+
+    #writing .work-item .work-logo {
+      display: block;
+      width: 75px;
+      height: 55px;
+      object-fit: contain;
+      opacity: 0.85;
+      filter: none;
+      flex-shrink: 0;
+    }
+
+    .work-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .work-item .category,
+    .work-item .source-link {
+      color: #000000;
+      background: #fffa9e;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      display: inline-block;
+      margin: 0;
+      border: none;
+      text-decoration: none;
+    }
+
+    .work-item .category {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .work-item h4 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .work-item p {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 650px;
+    }
+
+    .work-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      align-items: center;
+    }
+
+    .work-item a {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    /* FIELD SECTION LABELS */
+
+    #writing .work-item .work-meta .category {
+      font-size: 8px !important;
+      color: #000000 !important;
+      -webkit-text-fill-color: #000000 !important;
+    }
+
+    #writing .work-item .work-meta .source-link {
+      font-size: 12px !important;
+      color: #000000 !important;
+      -webkit-text-fill-color: #000000 !important;
+    }
+   
+/* ---------------------------------
+   OTHER INVESTIGATIONS - INTERACTIVE GRID
+--------------------------------- */
+
+.investigations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 0px;
+  position: relative;
+}
+
+.investigation-tile {
+  min-width: 0;
+  aspect-ratio: 2 / 1;
+}
+
+.investigation-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  border: none;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  cursor: pointer;
+  z-index: 1;
+
+  transition:
+  top 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+  left 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+  width 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+  height 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+  background 0.5s ease;
+}
+
+.investigation-panel:hover {
+  background: #fffba7;
+}
+
+.investigation-category {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.investigation-panel h3 {
+  font-size: clamp(17px, 1.6vw, 25px);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  max-width: 450px;
+}
+
+.investigation-description {
+  display: none;
+  max-width: 650px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555;
+  margin-top: 25px;
+}
+
+.investigation-description p {
+  margin-bottom: 20px;
+}
+
+/* EXPANDED PANEL */
+
+.investigation-panel.expanded {
+  position: fixed;
+  top: 4vh;
+  left: 3vw;
+  width: 94vw;
+  height: 92vh;
+
+  z-index: 2000;
+  background: #ffffff;
+  border: 1px solid #deded8;
+
+  padding: clamp(25px, 5vw, 75px);
+
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: clamp(25px, 4vw, 65px);
+
+  cursor: default;
+  overflow: hidden;
+}
+
+.investigation-panel.expanded:hover {
+  background: #ffffff;
+}
+
+/* CLOSE BUTTON */
+
+.panel-close-button {
+  display: none;
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 3000;
+
+  background: transparent;
+  border: none;
+  color: #222222;
+
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.investigation-panel.expanded .panel-close-button {
+  display: block;
+}
+
+.investigation-panel.no-transition {
+  transition: none !important;
+}
+
+/* TEXT COLUMN */
+
+.investigation-panel.expanded .investigation-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+
+  padding: 10px 12px 10px 0;
+}
+
+.investigation-panel.expanded h3 {
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.08;
+  max-width: 600px;
+  margin-top: 12px;
+}
+
+.investigation-panel.expanded .investigation-description {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* IMAGE / VIDEO COLUMN */
+
+.investigation-panel.expanded .investigation-media {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  background: #ffffff;
+  overflow: hidden;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.investigation-panel.expanded .investigation-media img,
+.investigation-panel.expanded .investigation-media video {
+  display: none;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.investigation-panel.expanded .media-placeholder {
+  color: #777;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 20px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  .investigations-grid {
+    gap: 8px;
+  }
+
+  .investigation-panel {
+    padding: 18px;
+  }
+
+  .investigation-panel h3 {
+    font-size: clamp(19px, 4vw, 27px);
+  }
+
+  .investigation-panel.expanded {
+    top: 4vh;
+    left: 3vw;
+    width: 94vw;
+    height: 92vh;
+
+    padding: 25px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(160px, 0.8fr);
+    gap: 15px;
+
+    overflow-y: auto;
+  }
+
+  .investigation-panel.expanded .investigation-copy {
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
+    padding: 5px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .investigation-panel.expanded h3 {
+    font-size: 32px;
+  }
+
+  .investigation-panel.expanded .investigation-description {
+    font-size: 13px;
+    margin-top: 15px;
+  }
+
+  .investigation-panel.expanded .investigation-media {
+    min-height: 220px;
+  }
+
+  .investigations-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .investigations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .investigation-panel {
+    padding: 12px;
+  }
+
+  .investigation-category {
+    font-size: 9px;
+  }
+
+  .investigation-panel h3 {
+    font-size: 18px;
+  }
+
+  .investigation-tile {
+    aspect-ratio: 1 / 1.15;
+}
+
+}
+
+/* IMAGE-ONLY TILE PREVIEWS */
+
+.investigation-panel:not(.expanded) {
+  position: relative;
+  background: transparent;
+}
+
+.investigation-panel:not(.expanded):hover {
+  background: transparent;
+}
+
+/* IMAGE fills the entire tile */
+.investigation-panel:not(.expanded) .investigation-media {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: transparent;
+}
+
+/* Show the photograph */
+.investigation-panel:not(.expanded) .investigation-media img {
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Hide the "Investigation media" placeholder */
+.investigation-panel:not(.expanded) .media-placeholder {
+  display: none !important;
+}
+
+/* Hide videos in the tile preview */
+.investigation-panel:not(.expanded) .investigation-media video {
+  display: none !important;
+}
+
+/* Keep the expand graphic */
+.investigation-panel:not(.expanded)::after {
+  content: "EXPAND ↗";
+  position: absolute;
+  right: 18px;
+  bottom: 15px;
+  z-index: 3;
+  color: #000000;
+  background: #fff878;
+  padding: 4px 7px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Subtle image zoom on hover */
+.investigation-panel:not(.expanded):hover .investigation-media img {
+  transform: scale(1.05);
+}
+
+    /* ---------------------------------
+       6. PHOTOGRAPHY
+    --------------------------------- */
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .photo-grid img {
+      height: 320px;
+      object-fit: contain;
+      background: #dddddd;
+    }
+
+    /* ---------------------------------
+       7. ABOUT AND CONTACT
+    --------------------------------- */
+
+    .about-text {
+      max-width: 700px;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #666666;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .contact-links a {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 4px;
+    }
+
+    footer {
+      padding: 30px 5%;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* ---------------------------------
+       8. MOBILE DESIGN
+    --------------------------------- */
+
+    @media (max-width: 800px) {
+
+      header {
+        padding: 0 5%;
+      }
+
+      nav {
+        gap: 12px;
+        font-size: 11px;
+      }
+
+      .intro {
+        min-height: 65vh;
+        padding: 90px 7%;
+      }
+
+      .intro-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .intro-photo {
+        width: 180px;
+        margin-left: 0;
+      }
+
+      .intro h1 {
+        letter-spacing: -2px;
+      }
+
+      .story {
+        display: block;
+      }
+
+      .visual-column {
+        position: sticky;
+        top: var(--nav-height);
+        height: 42vh;
+        padding: 10px 5%;
+        z-index: 10;
+        background: var(--background);
+      }
+
+      .story-panels {
+        padding: 0 8% 70px;
+      }
+
+      .story-panel {
+        min-height: 80vh;
+        padding: 55px 0;
+      }
+
+      .section {
+        padding: 75px 7%;
+      }
+
+      .work-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-grid img {
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        gap: 9px;
+        font-size: 10px;
+      }
+
+      .logo {
+        font-size: 11px;
+      }
+    }
+
+    .js .story-panel {
+      opacity: 0.35;
+    }
+
+    .js .story-panel.active {
+      opacity: 1;
+    }
+
+
+/* ---------------------------------
+   FILM SECTION
+--------------------------------- */
+
+#film {
+  background: #ffffff;
+  padding-bottom: 40px;
+}
+
+#film .film-list {
+  width: 90%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+#film .film-item {
+  padding: 35px 0 80px;
+  border-bottom: 1px solid var(--border);
+}
+
+#film .film-item:last-child {
+  padding-bottom: 10px;
+}
+
+#film .film-title {
+  font-size: clamp(27px, 4vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+#film .film-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  overflow: hidden;
+}
+
+#film .film-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#film .film-caption {
+  margin-top: 22px;
+  width: 100%;
+  color: #555555;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+#film .film-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  color: #222222;
+  margin-bottom: 5px;
+}
+
+#film .film-credit {
+  color: #222222;
+  margin-bottom: 12px;
+}
+
+#film .film-caption p {
+  color: #666666;
+  max-width: 850px;
+  line-height: 1.8;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  #film .film-list {
+    width: 92%;
+  }
+
+  #film .film-item {
+    padding: 25px 0 65px;
+  }
+
+  #film .film-title {
+    font-size: 27px;
+    margin-bottom: 20px;
+  }
+
+  #film .film-meta {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  #film .film-caption {
+    font-size: 13px;
+  }
+
+  #writing .work-item .work-meta .category {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+  }
+
+}
+
+ /* FIELD SAMPLE POPUP */
+
+    #field-sample-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(0, 0, 0, 0.45);
+      align-items: center;
+      justify-content: center;
+      padding: 4vh 4vw;
+    }
+
+    #field-sample-overlay.active {
+      display: flex;
+    }
+
+    #field-sample-window {
+      position: relative;
+      width: 90vw;
+      max-width: 900px;
+      height: 85vh;
+      background: #ffffff;
+      padding: clamp(30px, 6vw, 75px);
+      overflow-y: auto;
+    }
+
+    #field-sample-close {
+      position: absolute;
+      top: 15px;
+      right: 22px;
+      border: none;
+      background: transparent;
+      color: #222222;
+      font-family: Arial, sans-serif;
+      font-size: 34px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    #field-sample-content {
+      max-width: 700px;
+      margin: 0 auto;
+      padding-top: 15px;
+      text-align: left;
+    }
+
+    #field-sample-content h3 {
+      font-size: clamp(25px, 4vw, 38px);
+      line-height: 1.15;
+      margin-bottom: 25px;
+    }
+
+    #field-sample-content p {
+      color: #555555;
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    /* MOBILE */
+
+@media (max-width: 800px) {
+  #field-sample-overlay {
+    padding: 3vh 3vw;
+  }
+
+  #field-sample-window {
+    width: 94vw;
+    height: 92vh;
+    padding: 55px 25px 30px;
+  }
+
+  #field-sample-content p {
+    font-size: 14px;
+  }
+
+  #writing .work-item .work-logo {
+    width: 55px;
+    height: 45px;
+  }
+}
+
+/* READ SAMPLE BUTTON */
+
+#writing .field-sample-trigger {
+  font-family: inherit;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* REMOVE HORIZONTAL DIVIDING LINES THROUGHOUT THE WEBSITE */
+
+/* Navigation */
+header {
+  border-bottom: none;
+}
+
+/* Project headings */
+.project-heading {
+  border-top: none;
+}
+
+/* General sections */
+.section {
+  border-top: none;
+}
+
+/* Field work list */
+.work-list {
+  border-top: none;
+}
+
+.work-item {
+  border-bottom: none;
+}
+
+/* Preserve the divider between the two Field entries */
+#writing .work-item:first-child {
+  border-bottom: 1px solid var(--border);
+}
+
+/* Film section */
+#film .film-item {
+  border-bottom: none;
+}
+
+/* Footer */
+footer {
+  border-top: none;
+}
+
+/* CENTER AND STYLE ABOUT SECTION LINKS */
+#about .contact-links {
+  text-align: center; 
+}
+
+#about .contact-links a {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-color: #fff878;
+  padding: 3px 7px;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <header>
+    <a href="#" class="logo">PORTFOLIO - ANDREW HASTINGS</a>
+
+    <nav>
+      <a href="#investigations">Investigations</a>
+      <a href="#writing">Field</a>
+      <a href="#film">Film</a>
+      <a href="#about">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- INTRODUCTION -->
+
+  <section class="intro">
+
+    <div class="intro-layout">
+
+      <div class="intro-text">
+        <div class="eyebrow">Investigations · Storytelling</div>
+
+        <h1>ANDREW HASTINGS</h1>
+
+        <p>
+          I am an investigative storyteller, uncovering digital evidence with
+          Amnesty International’s Digital Verification Corps, part of the Crisis Evidence Lab.
+          In May 2027, I will complete my master's in International Affairs at the Hertie School in Berlin.
+        </p>
+      </div>
+
+      <div class="intro-photo">
+        <img src="images/profile.jpg" alt="Portrait of Andrew Hastings">
+      </div>
+
+    </div>
+
+    <div class="scroll-cue">↓ Scroll to explore selected work</div>
+
+  </section>
+
+
+  <!-- FEATURED INVESTIGATION -->
+
+  <section id="investigations">
+
+    <div class="project-heading">
+      <div class="eyebrow">MOZAMBIQUE (2025)</div>
+    </div>
+
+    <div class="story">
+
+      <!-- LEFT: FIXED VISUAL -->
+
+      <div class="visual-column">
+        <div class="visual-frame">
+
+          <video
+            src="videos/mozambique-01.mp4"
+            class="story-video active"
+            data-visual="1"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            aria-label="Video footage from the Mozambique investigation"
+          ></video>
+
+          <video
+            src="videos/mozambique-02.mp4"
+            class="story-video"
+            data-visual="2"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            aria-label="Video footage from the Mozambique investigation"
+          ></video>
+
+          <img
+            src="images/mozambique-01.jpg"
+            alt="Evidence from the Mozambique investigation"
+            data-visual="3"
+          >
+
+          <img
+            src="images/mozambique-02.jpg"
+            class="story-image"
+            data-visual="4"
+          >
+
+        </div>
+      </div>
+
+
+      <!-- RIGHT: SCROLLING INFORMATION PANELS -->
+
+      <div class="story-panels">
+
+        <article class="story-panel active" data-step="1">
+
+
+          <h4>Protest Under Attack</h4>
+
+          <p>
+            In 2024, Mozambicans voted to elect a new government, including 
+            Daniel Chapo, Presidential candidate for the Mozambique Liberation Front, as President.
+            Oposition leader Venâncio Mondlane contested the election results and called
+            for a nation-wide labour strike. In the following days, thousands across the
+            country took to the streets to protest, largely in a peaceful manner. 
+            Between October 2024 and January 2025, Amnesty International documented human 
+            rights violations by the Mozambican security forces.
+          </p>
+
+          <div class="panel-note">
+            Video may contain distressing images.
+          </div>
+
+        </article>
+
+
+        <article class="story-panel" data-step="2">
+
+          <p>
+            I contributed by sourcing digital evidence and verifying
+            it through geo- and chronolocation techniques,
+            including satellite imagery. Videos shared online provide important evidence of police
+            conduct during the protests. I particularly focused on the
+            unlawful use of less lethal weapons.
+            
+            As seen here, tear gas and kinetic impact projectiles were often
+            fired in an uncontrolled manner.
+          </p>
+
+        </article>
+
+
+        <article class="story-panel" data-step="3">
+
+          <p>
+            By comparing visible landmarks, buildings, road layouts,
+            and other environmental details with publicly available
+            satellite imagery, I identified areas where less lethal 
+            weapons were fired.
+          </p>
+
+          <div class="panel-note">
+            Pictured is satellite analysis of the previous video.
+          </div>
+
+        </article>
+
+
+        <article class="story-panel" data-step="4">
+
+          <p>
+            The final report brought together witness accounts,
+            digital evidence, and visual analysis to document violations
+            and call for accountability.
+          </p>
+
+              <a
+                href="https://www.amnesty.org/en/latest/news/2025/05/south-sudan-un-security-council-must-renew-and-enforce-arms-embargo-to-protect-civilians/"
+                target="_blank"
+                rel="noopener"
+                style="color: #000000 !important; background-color: #fffa9e !important; padding: 4px 8px; text-decoration: none; font-weight: 700; display: inline-block;"
+              >
+                Read Amnesty International's report ↗
+              </a>
+
+        </article>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SOUTH SUDAN CASE STUDY
+  ====================================================== -->
+
+  <section id="south-sudan-case-study">
+
+    <!-- HEADING -->
+
+        <div class="project-heading">
+      <div class="eyebrow">SOUTH SUDAN (2025)</div>
+    </div>
+
+
+<!-- PINNED IMAGE AND VERTICAL TEXT -->
+
+<div class="ss-vertical-scroll">
+
+  <div class="ss-vertical-sticky">
+
+    <!-- PINNED IMAGE -->
+
+    <div class="ss-hero-image">
+      <img
+        src="images/south-sudan-01.jpg"
+        alt="Satellite imagery from the South Sudan arms embargo investigation"
+      >
+    </div>
+
+    <!-- VERTICAL TEXT STEPS -->
+
+    <div class="ss-vertical-panels">
+
+      <article class="ss-step">
+        <p>
+          Since 2011, South Sudan has gone through a long civil war.
+          In 2018, the UNSC voted to ban arms transfers to the entirety South Sudan.
+          This applies to the government and all armed groups, with the UNMISS being the only exception.
+          There are reasons to believe, however, that the embargo is not being implemented
+          thoroughly and that weapons are still supplied to South Sudan.
+        </p>
+      </article>
+
+      <article class="ss-step">
+        <p>
+          In May 2025, Amnesty International called on the Security
+          Council to renew and enforce the embargo. I contributed
+          to this effort by sourcing evidence that identifies aircrafts,
+          armored vehicles, and small arms. I focused on content of
+          the South Sudan People's Defence Forces (SSPDF) and non-state
+          militas like the Patriots' Resistance Movement.
+        </p>
+      </article>
+
+      <article class="ss-step">
+        <p>
+          Satellite imagery provided an important means of
+          examining military activity at Juba International
+          Airport, where Amnesty International analysed the
+          movement of Mi-24 attack helicopters, seen on the left.
+          On the right are some personal contributions to tracking weapons.
+        </p>
+
+        <a
+          href="https://www.amnesty.org/en/latest/news/2025/05/south-sudan-un-security-council-must-renew-and-enforce-arms-embargo-to-protect-civilians/"
+          target="_blank"
+          rel="noopener"
+          style="color: #000000 !important; background-color: #fffa9e !important; padding: 4px 8px; text-decoration: none; font-weight: 700; display: inline-block;"
+        >
+          Read it from Amnesty International ↗
+        </a>
+      </article>
+
+    </div>
+
+    <!-- PROGRESS INDICATOR -->
+
+    <div class="ss-progress">
+      <span id="ss-progress-label">01 / 03</span>
+      <div class="ss-progress-line">
+        <div id="ss-progress-bar"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+  </section>
+
+
+  <!-- SOUTH SUDAN STYLING -->
+
+  <style>
+
+    #south-sudan-case-study {
+      --ss-accent: #b65b3e;
+      --ss-text: #202020;
+      --ss-muted: #707070;
+
+      background: #ffffff;
+      color: var(--ss-text);
+      overflow: clip;
+    }
+
+    #south-sudan-case-study * {
+      box-sizing: border-box;
+    }
+
+
+    /* HEADING */
+
+    #south-sudan-case-study .ss-heading {
+      padding: 75px 5% 45px;
+    }
+
+    #south-sudan-case-study .ss-eyebrow {
+      color: var(--ss-accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    #south-sudan-case-study .ss-heading h2 {
+      font-size: clamp(32px, 5vw, 58px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      max-width: 850px;
+      margin-bottom: 15px;
+    }
+
+    #south-sudan-case-study .ss-heading h3 {
+      font-size: clamp(22px, 3vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -1px;
+      max-width: 850px;
+      margin-bottom: 15px;
+    }
+
+    #south-sudan-case-study .ss-heading p {
+      max-width: 650px;
+      color: var(--ss-muted);
+      line-height: 1.8;
+    }
+
+
+/* SCROLL AREA */
+
+#south-sudan-case-study .ss-vertical-scroll {
+  width: 90%;
+  max-width: 1250px;
+  height: 450vh;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+/* PINNED COMPOSITION */
+
+#south-sudan-case-study .ss-vertical-sticky {
+  position: sticky;
+  top: 9vh;
+  height: 90vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+/* BACKGROUND IMAGE */
+
+#south-sudan-case-study .ss-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity 1s ease;
+}
+
+#south-sudan-case-study .ss-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+
+/* IMAGE FADES OUT */
+
+#south-sudan-case-study .ss-vertical-sticky.image-faded .ss-hero-image {
+  opacity: 0.12;
+}
+
+
+/* VERTICAL TEXT PANELS */
+
+#south-sudan-case-study .ss-vertical-panels {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 5% 8%;
+  pointer-events: none;
+  left: 50%;
+  transform: translateX(-50%); 
+}
+
+#south-sudan-case-study .ss-step {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 0 50px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+#south-sudan-case-study .ss-step.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#south-sudan-case-study .ss-number {
+  color: var(--ss-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+#south-sudan-case-study .ss-step p {
+  max-width: 750px;
+  color: #333333;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.85);
+  padding: 15px;
+}
+
+#south-sudan-case-study .ss-step a {
+  width: fit-content;
+  pointer-events: auto;
+  color: #000000;
+  background: #fff878;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+
+/* MOBILE */
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+  #south-sudan-case-study .ss-vertical-scroll {
+    width: 94%;
+    height: 300vh;
+  }
+
+  /* Stack image above text */
+  #south-sudan-case-study .ss-vertical-sticky {
+    top: 9vh;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Image occupies the top 38% */
+  #south-sudan-case-study .ss-hero-image {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 38%;
+    flex: 0 0 38%;
+    opacity: 1;
+  }
+
+  #south-sudan-case-study .ss-hero-image img {
+    object-fit: contain;
+  }
+
+  /* Text occupies the remaining space */
+  #south-sudan-case-study .ss-vertical-panels {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 62%;
+    flex: 0 0 62%;
+    padding: 5%;
+    transform: none;
+  }
+
+  /* Keep image visible throughout the text steps */
+  #south-sudan-case-study .ss-vertical-sticky.image-faded .ss-hero-image {
+    opacity: 1;
+  }
+
+  #south-sudan-case-study .ss-step {
+    padding: 15px 0;
+    justify-content: center;
+  }
+
+  #south-sudan-case-study .ss-step p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+}
+
+  </style>
+
+
+  <!-- SOUTH SUDAN SCROLL INTERACTION -->
+
+<script>
+
+const ssScroll = document.querySelector(
+  "#south-sudan-case-study .ss-vertical-scroll"
+);
+
+if (ssScroll) {
+  const sticky = ssScroll.querySelector(".ss-vertical-sticky");
+  const image = ssScroll.querySelector(".ss-hero-image");
+  const steps = Array.from(ssScroll.querySelectorAll(".ss-step"));
+
+  const progressLabel = document.querySelector("#ss-progress-label");
+  const progressBar = document.querySelector("#ss-progress-bar");
+
+  function updateSouthSudan() {
+    const scrollableDistance =
+      ssScroll.offsetHeight - sticky.offsetHeight;
+
+    const scrolled = Math.min(
+      Math.max(-ssScroll.getBoundingClientRect().top, 0),
+      scrollableDistance
+    );
+
+    const progress = scrollableDistance > 0
+      ? scrolled / scrollableDistance
+      : 0;
+
+    // First 25%: image only.
+    // Remaining 75%: three text steps.
+    let stage = 0;
+
+    if (progress >= 0.25) {
+      stage = Math.min(
+        3,
+        Math.floor((progress - 0.25) / 0.25) + 1
+      );
+    }
+
+    steps.forEach((step, index) => {
+      step.classList.toggle(
+        "active",
+        index === stage - 1
+      );
+    });
+
+    image.classList.toggle("image-faded", stage > 0);
+
+    if (progressLabel) {
+      progressLabel.textContent =
+        stage === 0 ? " " : `0${stage} / 03`;
+    }
+
+    if (progressBar) {
+      progressBar.style.width =
+        `${Math.max(0, (progress - 0.25) / 0.75) * 100}%`;
+    }
+  }
+
+  window.addEventListener("scroll", updateSouthSudan);
+  window.addEventListener("resize", updateSouthSudan);
+
+  updateSouthSudan();
+}
+
+</script>
+
+  <!-- END SOUTH SUDAN CASE STUDY -->
+
+
+
+  <!-- OTHER INVESTIGATIONS -->
+
+  <section class="section" id="other-investigations">
+
+    <!-- HEADING -->
+
+      <div class="project-heading">
+      <div class="eyebrow">FORTHCOMING INVESTIGATIONS</div>
+      </div>
+
+    <div class="investigations-grid">
+
+      <!-- 1. AUTONOMOUS WEAPONS -->
+
+      <div class="investigation-tile">
+
+        <article class="investigation-panel">
+
+          <div class="investigation-copy">
+
+            <div class="investigation-category">
+              Amnesty International
+            </div>
+
+            <h3>Autonomous weapons systems</h3>
+
+            <div class="investigation-description">
+              <p>
+                Loitering munitions, often referred to as “kamikaze drones”,
+                are aerial weapons that hover over an area before striking
+                a selected target by crashing into it with an integrated warhead.
+                The increasing integration of artificial intelligence and
+                automated decision-making into loitering munitions has
+                heightened legal and ethical concerns.
+              </p>
+
+              <p>
+                I contributed to a project that aims to provide a systematic
+                method for identifying and documenting recent unlawful use
+                of loitering munitions in armed conflicts by both state and
+                non-state actors. The project is global in its scope and
+                leverages a variety of OSINT techniques.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="investigation-media">
+            <div class="media-placeholder">Investigation media</div>
+            <img src="images/autonomous-weapons.jpg" data-image="" alt="">
+            <video data-video="videos/autonomous-weapons.mp4" muted loop playsinline></video>
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- 2. POLICE BRUTALITY -->
+
+      <div class="investigation-tile">
+
+        <article class="investigation-panel">
+
+          <div class="investigation-copy">
+
+            <div class="investigation-category">
+              Amnesty International
+            </div>
+
+            <h3>Police brutality in Germany and Turkey</h3>
+
+            <div class="investigation-description">
+
+              <p>
+                In Germany and Turkey, Amnesty International reported
+                unlawful restrictions on freedom of peaceful assembly and
+                freedom of expression. Violations include blanket bans,
+                unlawful dispersal of peaceful protests and use of force
+                against protesters, such as beating, kicking and unlawful
+                use of less lethal weapons. In Germany, there is also
+                particular concern regarding pain-compliance holds.
+              </p>
+
+              <p>
+                For both countries, I contributed to digital investigations
+                through sourcing evidence, analyzing the alleged violations,
+                and verifying the material through geo- and chronolocation.
+                In Berlin, I also reported from the ground, recording evidence
+                and sourcing testimony.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="investigation-media">
+            <div class="media-placeholder">Investigation media</div>
+            <img src="images/berlin.jpg" data-image="images/berlin.jpg" alt="">
+            <video data-video="" muted loop playsinline></video>
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- 3. WHITE PHOSPHORUS -->
+
+      <div class="investigation-tile">
+
+        <article class="investigation-panel">
+
+          <div class="investigation-copy">
+
+            <div class="investigation-category">
+              Amnesty International
+            </div>
+
+            <h3>White phosphorus in South Lebanon</h3>
+
+            <div class="investigation-description">
+
+              <p>
+                Israeli forces have extensively used white phosphorus and
+                flare bombs, which have led to significant environmental
+                damage, in southern Lebanon. I contributed to reporting
+                on the environmental damage caused by Israel and explored
+                these actions as potential international law violations,
+                particularly as a war crime.
+              </p>
+
+              <p>
+                This work necessitated extensive use of satellite imagery
+                and particularly challenging geolocation tasks.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="investigation-media">
+            <div class="media-placeholder">Investigation media</div>
+            <img src="images/south-lebanon.jpg" data-image="images/south-lebanon.jpg" alt="">
+            <video data-video="" muted loop playsinline></video>
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- 4. ROHINGYA GENOCIDE -->
+
+      <div class="investigation-tile">
+
+        <article class="investigation-panel">
+
+          <div class="investigation-copy">
+
+            <div class="investigation-category">
+              Khthon
+            </div>
+
+            <h3>Rohingya genocide in Myanmar</h3>
+
+            <div class="investigation-description">
+
+              <p>
+                I recently joined Khthon as an Investigative Analyst
+                to contribute to visual investigations into the
+                Rohingya genocide in Myanmar. Khthon specializes in
+                satellite analysis to locate mass graves across the world.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="investigation-media">
+            <div class="media-placeholder">Investigation media</div>
+            <img src="images/myanmar.jpg" data-image="images/myanmar.jpg" alt="">
+            <video data-video="" muted loop playsinline></video>
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  
+<!-- FIELD REPORTING -->
+
+<div class="project-heading">
+  <section class="section" id="writing">
+    <div class="eyebrow">Field</div>
+
+    <div class="work-list">
+
+      <!-- FIRST ITEM -->
+      <div class="work-item">
+        <div>
+          <h4>Rethinking What Protection Means in Palestine</h4>
+          <p>
+            An account of international protective presence in the
+            occupied West Bank, drawing on fieldwork and long-form interviews
+            from the early months of 2026.
+          </p>
+
+          <div class="work-meta">
+            <span class="category" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important;">Human Rights Chronicle · Forthcoming</span>
+            <button type="button" class="source-link field-sample-trigger">READ SAMPLE ↗</button>
+          </div>
+        </div>
+
+        <img
+          class="work-logo"
+          src="images/human-rights-chronicle.jpg"
+          alt="Human Rights Chronicle logo"
+        >
+      </div>
+
+      <!-- SECOND ITEM -->
+      <div class="work-item">
+        <div>
+          <h4>Visual dialogues with Sanyam Bajaj</h4>
+          <p>
+            A conversation exploring the relationship between
+            artistic expression, policy, and climate narratives.
+          </p>
+
+          <div class="work-meta">
+            <span class="category" style="color: #000000 !important; -webkit-text-fill-color: #000000 !important;">The Governance Post · 2025</span>
+            <a
+              class="source-link"
+              href="https://www.thegovernancepost.org/articles/the-art-policy-connection-sanyam-bajaj-s-visual-dialogue-on-climate-narratives"
+              target="_blank"
+              rel="noopener"
+            >Read article ↗</a>
+          </div>
+        </div>
+
+        <img
+          class="work-logo"
+          src="images/governance-post.jpg"
+          alt="The Governance Post logo"
+        >
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+<!-- FIELD SAMPLE POPUP -->
+
+<div id="field-sample-overlay">
+
+  <div id="field-sample-window" role="dialog" aria-modal="true" aria-labelledby="field-sample-title">
+
+    <button
+      type="button"
+      id="field-sample-close"
+      aria-label="Close window"
+    >
+      &times;
+    </button>
+
+    <div id="field-sample-content">
+
+      <h3 id="field-sample-title">
+        Rethinking What Protection Means in Palestine
+      </h3>
+
+      <p>
+        The Abu Hamam family was one of two families remaining in the West Bank’s 
+        Al-Khalayel valley, after their neighbors fled. On one late 
+        night, like nights before, Israeli settlers attacked. They 
+        injured a 13 year-old child, a 59 year-old mother, and four international activists 
+        who were staying there. All were rushed to the Ramallah hospital. I was 
+        not there then. Rather, I arrived one month later, in early 2026. I slept in the same 
+        beds where the others had slept, when masked men assaulted them. Several weeks after 
+        leaving, I received word that the Abu Hamam family was forcibly displaced. There are 
+        no Palestinians remaining in Al-Khalayel.
+      </p>
+
+      <p>
+       Foreign activists travel to the West Bank to provide what's called "protective presence". They 
+       leverage their outsider status to deter attacks amidst armed conflict. The idea is that 
+       Israeli settlers are more hesistant to hurt people when internationals are present, especially 
+       Americans and Europeans. Some call it "passport protection". In the West Bank, it's called 
+       "solidarity presence". I spent one month there, living alongside frontline communities and 
+       interviewing people to better understand how solidarity presence works. I wanted to know: 
+       If the limits of international presence are increasingly apparent, as the Abu Hamam story shows, 
+       then why do people continue to go?
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+  </section>
+
+<!-- FILM -->
+<section id="film">
+
+  <div class="project-heading">
+    <div class="eyebrow">FILM</div>
+  </div>
+
+  <div class="film-list">
+
+    <!-- FILM 1: TO BEYOND -->
+
+    <article class="film-item">
+
+      <h3 class="film-title">To Beyond (2025)</h3>
+      <div class="film-award">Awarded "Best Experimental Feature" at Indie Gathering</div>
+
+      <div class="film-video">
+        <video
+          src="videos/to-beyond.mp4"
+          controls
+          playsinline
+          preload="metadata"
+          muted
+          aria-label="To Beyond film trailer"
+        ></video>
+      </div>
+
+      <div class="film-caption">
+
+        <div class="film-meta">
+          <span>Directed by: Stephen Bailey Michaels</span>
+          <span>73m runtime</span>
+        </div>
+
+        <div class="film-credit">
+          Credit: First Assistant Director
+        </div>
+
+        <p>
+          Catastrophe looms over an empty city. One dreamer searches for transcendence.
+          Inspired by the novella "Through the Gate of the Silver Key" by H.P. Lovecraft
+          and E. Hoffman Price. As First Assistant Director, I oversaw set operations, 
+          managed cast & crew, and worked closely with the director to ensure success 
+          throughout production.
+        </p>
+
+      </div>
+
+    </article>
+
+
+    <!-- FILM 2: ABORTION: ADD TO CART -->
+
+    <article class="film-item">
+
+      <h3 class="film-title">Abortion: Add to Cart (2022)</h3>
+      <div class="film-award">Awarded "Best Short Documentary" at Manchester International Film Festival</div>
+      <div class="film-video">
+        <video
+          src="videos/abortion-add-to-cart.mp4"
+          controls
+          playsinline
+          preload="metadata"
+          muted
+          aria-label="Abortion: Add to Cart film trailer"
+        ></video>
+      </div>
+
+      <div class="film-caption">
+
+        <div class="film-meta">
+          <span>Directed by: Jessica Sarah Flaum</span>
+          <span>35m runtime</span>
+        </div>
+
+        <div class="film-credit">
+          Credit: Post-Production Assistant
+        </div>
+
+        <p>
+          A documentary about abortion pills ordered online
+          and the activists using digital tools to help people
+          access care. As Post-Production Assistant, I supported 
+          graphic design, public relations, and festival rollout.
+        </p>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+  <!-- ABOUT -->
+
+  <section class="section" id="about">
+    <h2>Andrew Hastings</h2>
+
+    <div class="contact-links">
+      <a href="mailto:andrewdylanhastings@pm.me">Email</a>
+      <a href="www.linkedin.com/in/andrewhastings" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+
+  <!-- ---------------------------------
+       9. SCROLL INTERACTION
+  --------------------------------- -->
+
+  <script>
+
+    // MOZAMBIQUE SCROLL INTERACTION
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      document.documentElement.classList.add("js");
+
+      const panels = document.querySelectorAll(
+        "#investigations .story-panel"
+      );
+
+      const visuals = document.querySelectorAll(
+        "#investigations .visual-frame img, #investigations .visual-frame video"
+      );
+
+      function changeVisual(step) {
+
+        visuals.forEach(visual => {
+
+          const isSelected = visual.dataset.visual === step;
+
+          visual.classList.toggle("active", isSelected);
+
+          if (visual.tagName === "VIDEO") {
+
+            if (isSelected) {
+              visual.play().catch(() => {});
+            } else {
+              visual.pause();
+              visual.currentTime = 0;
+            }
+
+          }
+
+        });
+
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            panels.forEach(panel => {
+              panel.classList.remove("active");
+            });
+
+            entry.target.classList.add("active");
+
+            const step = entry.target.dataset.step;
+
+            changeVisual(step);
+
+          }
+
+        });
+
+      }, {
+        root: null,
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: 0
+      });
+
+      panels.forEach(panel => {
+        observer.observe(panel);
+      });
+
+      changeVisual("1");
+
+    });
+
+  </script>
+
+
+<script>
+
+// OTHER INVESTIGATIONS - HOVER EXPANSION
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const panels = document.querySelectorAll(".investigation-panel");
+
+  let activePanel = null;
+  let pendingPanel = null;
+  let isClosing = false;
+
+  panels.forEach(panel => {
+
+    const tile = panel.closest(".investigation-tile");
+
+    const video = panel.querySelector("video");
+    const image = panel.querySelector("img");
+    const placeholder = panel.querySelector(".media-placeholder");
+
+    let expanded = false;
+    let opening = false;
+
+    let finishTimer;
+
+    let originalPosition;
+
+    const animationDuration = 0;
+
+    // CREATE CLOSE BUTTON
+
+    const closeButton = document.createElement("button");
+
+    closeButton.className = "panel-close-button";
+    closeButton.innerHTML = "&times;";
+    closeButton.setAttribute("aria-label", "Close window");
+
+    closeButton.addEventListener("click", event => {
+      event.stopPropagation();
+      closePanel();
+    });
+
+    panel.appendChild(closeButton);
+
+    // LOAD MEDIA
+
+    function loadMedia() {
+
+      const videoSource = video.dataset.video;
+      const imageSource = image.dataset.image;
+
+      if (videoSource) {
+
+        video.src = videoSource;
+        video.style.display = "block";
+        placeholder.style.display = "none";
+
+        video.play().catch(() => {});
+
+      } else if (imageSource) {
+
+        image.src = imageSource;
+        image.style.display = "block";
+        placeholder.style.display = "none";
+
+      }
+
+    }
+
+    // REMOVE MEDIA
+
+    function removeMedia() {
+
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+      video.style.display = "none";
+
+      image.style.display = "none";
+
+      placeholder.style.display = "block";
+
+    }
+
+    // OPEN PANEL
+
+    function openPanel() {
+
+      if (activePanel || expanded || opening) return;
+
+      activePanel = panel;
+      opening = true;
+
+      clearTimeout(finishTimer);
+
+      originalPosition = tile.getBoundingClientRect();
+
+      // Disable background scrolling
+      document.documentElement.style.overflow = "hidden";
+
+      panel.style.position = "fixed";
+      panel.style.top = originalPosition.top + "px";
+      panel.style.left = originalPosition.left + "px";
+      panel.style.width = originalPosition.width + "px";
+      panel.style.height = originalPosition.height + "px";
+      panel.style.zIndex = "2000";
+
+      void panel.offsetWidth;
+
+      loadMedia();
+
+      requestAnimationFrame(() => {
+
+        panel.classList.add("expanded");
+
+        panel.style.top = "4vh";
+        panel.style.left = "3vw";
+        panel.style.width = "94vw";
+        panel.style.height = "92vh";
+
+      });
+
+      finishTimer = setTimeout(() => {
+
+        opening = false;
+        expanded = true;
+
+      }, animationDuration);
+
+    }
+
+    // CLOSE PANEL
+
+    function closePanel() {
+
+      if (activePanel !== panel || (!expanded && !opening)) return;
+
+      opening = false;
+      expanded = false;
+      isClosing = true;
+
+      clearTimeout(finishTimer);
+
+      panel.style.top = originalPosition.top + "px";
+      panel.style.left = originalPosition.left + "px";
+      panel.style.width = originalPosition.width + "px";
+      panel.style.height = originalPosition.height + "px";
+
+      finishTimer = setTimeout(() => {
+
+        panel.classList.add("no-transition");
+
+        panel.classList.remove("expanded");
+        panel.removeAttribute("style");
+
+        removeMedia();
+
+        void panel.offsetWidth;
+
+        requestAnimationFrame(() => {
+          panel.classList.remove("no-transition");
+        });
+
+        activePanel = null;
+        isClosing = false;
+
+        // Restore background scrolling
+        document.documentElement.style.overflow = "";
+
+        // Open the next panel if the cursor is still hovering over it.
+        if (pendingPanel) {
+          const nextPanel = pendingPanel;
+          pendingPanel = null;
+          nextPanel._openPanel();
+        }
+
+      }, animationDuration);
+
+    }
+
+     // Make the open function accessible to other panels
+      panel._openPanel = openPanel;
+
+ // CLICK TO OPEN ON ALL DEVICES
+
+panel.addEventListener("click", event => {
+
+  if (event.target.closest(".panel-close-button")) return;
+
+  if (!activePanel) {
+    openPanel();
+  }
+
+});
+
+
+// KEYBOARD ACCESSIBILITY
+
+panel.setAttribute("tabindex", "0");
+
+panel.addEventListener("focus", () => {
+
+  if (!activePanel) {
+    openPanel();
+  }
+
+});
+
+// Losing focus no longer closes the panel.
+
+  });
+
+});
+
+</script>
+
+<script>
+  const filmVideos = document.querySelectorAll("#film video");
+
+  const filmObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+
+      if (entry.isIntersecting) {
+        // Pause all other film trailers
+        filmVideos.forEach(otherVideo => {
+          if (otherVideo !== video) {
+            otherVideo.pause();
+          }
+        });
+
+        // Start the visible trailer
+        video.muted = true;
+        video.play().catch(() => {});
+      } else {
+        // Pause when scrolled away
+        video.pause();
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+
+  filmVideos.forEach(video => {
+    filmObserver.observe(video);
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const overlay = document.getElementById("field-sample-overlay");
+  const closeButton = document.getElementById("field-sample-close");
+  const trigger = document.querySelector(".field-sample-trigger");
+
+  if (!overlay || !closeButton || !trigger) return;
+
+  let previousOverflow = "";
+
+  function openSample() {
+    previousOverflow = document.documentElement.style.overflow;
+
+    overlay.classList.add("active");
+    document.documentElement.style.overflow = "hidden";
+
+    closeButton.focus();
+  }
+
+  function closeSample() {
+    overlay.classList.remove("active");
+    document.documentElement.style.overflow = previousOverflow;
+
+    trigger.focus();
+  }
+
+  trigger.addEventListener("click", openSample);
+
+  closeButton.addEventListener("click", closeSample);
+
+  // Close when clicking outside the popup
+  overlay.addEventListener("click", event => {
+    if (event.target === overlay) {
+      closeSample();
+    }
+  });
+
+  // Close with Escape
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && overlay.classList.contains("active")) {
+      closeSample();
+    }
+  });
+
+});
+</script>
+
+</body>
+</html>
